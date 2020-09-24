@@ -1,6 +1,6 @@
 ﻿namespace Lender.API.Application.DTO
 {
-    public class User
+    public class UserDto
     {
         public string DisplayName { get; set; }
 

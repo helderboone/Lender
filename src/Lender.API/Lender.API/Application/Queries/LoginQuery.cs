@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Lender.API.Application.Queries
 {
-    public class LoginQuery : IRequest<User>
+    public class LoginQuery : IRequest<UserDto>
     {
         public string Email { get; set; }
 

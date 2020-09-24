@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lender.API.Application.Queries
 {
-    public class LoginHandler : IRequestHandler<LoginQuery, User>
+    public class LoginHandler : IRequestHandler<LoginQuery, UserDto>
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -21,7 +21,7 @@ namespace Lender.API.Application.Queries
             _jwtGenerator = jwtGenerator;
         }
 
-        public async Task<User> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
 
             var user = await _userManager.FindByEmailAsync(request.Email);
@@ -32,7 +32,7 @@ namespace Lender.API.Application.Queries
 
             //if (!result.Succeeded) throw new RestException(HttpStatusCode.Unauthorized);
 
-            return new User
+            return new UserDto
             {
                 Token = _jwtGenerator.CreateToken(user),
                 UserName = user.UserName,

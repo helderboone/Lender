@@ -11,7 +11,7 @@ namespace Lender.API.Controllers
     {
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(LoginQuery query)
+        public async Task<ActionResult<UserDto>> Login(LoginQuery query)
         {
             return await Mediator.Send(query);
         }
