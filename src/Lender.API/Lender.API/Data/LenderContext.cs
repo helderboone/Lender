@@ -13,6 +13,7 @@ namespace Lender.API.Data
         public LenderContext(DbContextOptions<LenderContext> options) : base(options) { }
 
         public DbSet<Friend> Friends { get; set; }
+        public DbSet<Game> Games { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

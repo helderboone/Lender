@@ -9,6 +9,7 @@ namespace Lender.API.AutoMapper
     {
         public AutoMapperProfiles()
         {
+            //Friends
             CreateMap<CreateFriendCommand, Friend>().ReverseMap();
             CreateMap<CreateFriendCommand, Address>().ReverseMap();
 
@@ -20,6 +21,12 @@ namespace Lender.API.AutoMapper
                 .ForMember(x => x.Street, y => y.MapFrom(z => z.Address.Street))
                 .ForMember(x => x.Neighborhood, y => y.MapFrom(z => z.Address.Neighborhood))
                 .ForMember(x => x.City, y => y.MapFrom(z => z.Address.City));
+
+            //Games
+            CreateMap<CreateGameCommand, Game>().ReverseMap();
+            CreateMap<UpdateFriendCommand, Game>().ReverseMap();
+
+            CreateMap<Game, GameDto>();
         }
     }
 }

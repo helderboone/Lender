@@ -23,6 +23,11 @@ namespace Lender.API.Data.Mappings
                 .WithOne(f => f.User)
                 .HasForeignKey(f => f.UserId);
 
+            // 1 : N => User : Games
+            builder.HasMany(u => u.Games)
+                .WithOne(g => g.User)
+                .HasForeignKey(g => g.UserId);
+
             builder.ToTable("User");
         }
     }
