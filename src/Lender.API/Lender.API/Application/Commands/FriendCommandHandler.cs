@@ -4,7 +4,6 @@ using Lender.API.Data;
 using Lender.API.Models;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,6 +28,7 @@ namespace Lender.API.Application.Commands
         public async Task<FriendDto> Handle(CreateFriendCommand request, CancellationToken cancellationToken)
         {
             var friend = _mapper.Map<CreateFriendCommand, Friend>(request);
+            friend.Address = _mapper.Map<CreateFriendCommand, Address>(request);
 
             var user = await _userManager.FindByEmailAsync("joao@email.com");
 
@@ -36,9 +36,7 @@ namespace Lender.API.Application.Commands
 
             _context.Friends.Add(friend);
 
-            var success = await _context.SaveChangesAsync() > 0;
-
-            if (!success) throw new Exception("Problem saving changes");
+            await _context.Commit();
 
             return _mapper.Map<FriendDto>(friend);
         }
@@ -49,9 +47,9 @@ namespace Lender.API.Application.Commands
 
             friend.Update(request.Name, request.Email, request.Phone);
 
-            var success = await _context.SaveChangesAsync() > 0;
+            friend.Address = _mapper.Map<UpdateFriendCommand, Address>(request);
 
-            if (!success) throw new Exception("Problem saving changes");
+            await _context.Commit();
 
             return _mapper.Map<FriendDto>(friend);
         }
@@ -62,9 +60,7 @@ namespace Lender.API.Application.Commands
 
             _context.Friends.Remove(friend);
 
-            var success = await _context.SaveChangesAsync() > 0;
-
-            if (!success) throw new Exception("Problem saving changes");
+            await _context.Commit();
 
             return Unit.Value;
         }

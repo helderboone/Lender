@@ -32,6 +32,11 @@ namespace Lender.API.Data.Mappings
                 .IsRequired()
                 .HasColumnType("timestamp");
 
+            // 1 : 1 => Friend : Address
+            builder.HasOne(f => f.Address)
+                .WithOne(a => a.Friend)
+                .HasForeignKey<Address>(b => b.FriendId);
+
             // 1 : N => User : Friends
             builder.HasOne(f => f.User)
                 .WithMany(u => u.Friends);

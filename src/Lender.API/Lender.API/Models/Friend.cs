@@ -18,6 +18,8 @@ namespace Lender.API.Models
 
         public string UserId { get; set; }
 
+        public Address Address { get; set; }
+
         public void Update(string name, string email, string phone)
         {
             Name = name;
