@@ -1,4 +1,5 @@
 ﻿using Lender.API.Application.Commands;
+using Lender.API.Application.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -9,16 +10,26 @@ namespace Lender.API.Controllers
     [Route("api/[controller]")]
     public class FriendController : BaseApiController
     {
-
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateFriend(UpdateFriendCommand command)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Details(long id)
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await Mediator.Send(new FriendDetailQuery { Id = id }));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            return Ok(await Mediator.Send(new FriendListQuery()));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateFriend(CreateFriendCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateFriend(UpdateFriendCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
