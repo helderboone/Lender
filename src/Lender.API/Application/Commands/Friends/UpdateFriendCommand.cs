@@ -1,5 +1,6 @@
 ﻿using Lender.API.Application.DTO;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Lender.API.Application.Commands
 {
@@ -20,5 +21,7 @@ namespace Lender.API.Application.Commands
         public string Neighborhood { get; set; }
 
         public string City { get; set; }
+
+        public IFormFile File { get; set; }
     }
 }

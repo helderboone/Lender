@@ -22,10 +22,10 @@ namespace Lender.API.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(20)");
 
-            builder.Property(c => c.Url)
+            builder.Property(c => c.PhotoUrl)
                 .HasColumnType("varchar(255)");
 
-            builder.Property(c => c.PublicId)
+            builder.Property(c => c.PhotoPublicId)
                 .HasColumnType("varchar(255)");
 
             builder.Property(c => c.CreationTime)

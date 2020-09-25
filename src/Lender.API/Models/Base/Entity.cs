@@ -6,6 +6,6 @@ namespace Lender.API.Models.Base
     {
         public long Id { get; set; }
 
-        public DateTime CreationTime { get; protected set; }
+        public DateTime CreationTime { get; set; }
     }
 }

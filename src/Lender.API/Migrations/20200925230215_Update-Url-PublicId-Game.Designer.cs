@@ -3,15 +3,17 @@ using System;
 using Lender.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Lender.API.Migrations
 {
     [DbContext(typeof(LenderContext))]
-    partial class LenderContextModelSnapshot : ModelSnapshot
+    [Migration("20200925230215_Update-Url-PublicId-Game")]
+    partial class UpdateUrlPublicIdGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

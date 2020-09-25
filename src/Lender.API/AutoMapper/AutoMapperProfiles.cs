@@ -14,7 +14,7 @@ namespace Lender.API.AutoMapper
             CreateMap<CreateFriendCommand, Address>().ReverseMap();
 
             CreateMap<UpdateFriendCommand, Friend>().ReverseMap();
-            CreateMap<UpdateFriendCommand, Address>().ReverseMap();
+            CreateMap<UpdateFriendCommand, Address>();
 
             CreateMap<Friend, FriendDto>()
                 .ForMember(x => x.Number, y => y.MapFrom(z => z.Address.Number))

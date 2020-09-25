@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Lender.API.Configuration.Settings;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ namespace Lender.API.Configuration
             services.AddControllers();
 
             services.AddCors();
+
+            services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
             return services;
         }

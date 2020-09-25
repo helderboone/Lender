@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Lender.API.Application.DTO;
 using Lender.API.Data;
+using Lender.API.Helper;
 using Lender.API.Models;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -17,23 +18,29 @@ namespace Lender.API.Application.Commands
 
         private readonly LenderContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IPhotoAccessor _photoAccesor;
         private readonly IMapper _mapper;
 
-        public GameCommandHandler(LenderContext context, UserManager<AppUser> userManager, IMapper mapper)
+        public GameCommandHandler(LenderContext context, UserManager<AppUser> userManager, IPhotoAccessor photoAccesor, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _photoAccesor = photoAccesor;
             _mapper = mapper;
         }
 
 
         public async Task<GameDto> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
+            var photoUploadResult = _photoAccesor.AddPhoto(request.File);
+
             var game = _mapper.Map<CreateGameCommand, Game>(request);
 
             var user = await _userManager.FindByEmailAsync("joao@email.com");
 
             game.User = user;
+
+            game.AddPhoto(photoUploadResult);
 
             _context.Games.Add(game);
 
@@ -46,7 +53,11 @@ namespace Lender.API.Application.Commands
         {
             var game = await _context.Games.FindAsync(request.Id);
 
-            game.Update(request.Name, request.Gender);
+            _photoAccesor.DeletePhoto(game.PhotoPublicId);
+
+            var photoUploadResult = _photoAccesor.AddPhoto(request.File);
+
+            game.Update(request.Name, request.Gender, photoUploadResult);
 
             await _context.Commit();
 
@@ -55,9 +66,11 @@ namespace Lender.API.Application.Commands
 
         public async Task<Unit> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
         {
-            var gane = await _context.Games.FindAsync(request.Id);
+            var game = await _context.Games.FindAsync(request.Id);
 
-            _context.Games.Remove(gane);
+            _photoAccesor.DeletePhoto(game.PhotoPublicId);
+
+            _context.Games.Remove(game);
 
             await _context.Commit();
 

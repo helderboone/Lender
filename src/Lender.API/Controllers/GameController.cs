@@ -1,6 +1,5 @@
 ﻿using Lender.API.Application.Commands;
 using Lender.API.Application.Queries;
-using Lender.API.Application.Queries.Games;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -24,13 +23,13 @@ namespace Lender.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateFriend(CreateGameCommand command)
+        public async Task<IActionResult> CreateFriend([FromForm] CreateGameCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateFriend(UpdateGameCommand command)
+        public async Task<IActionResult> UpdateFriend([FromForm] UpdateGameCommand command)
         {
             return Ok(await Mediator.Send(command));
         }

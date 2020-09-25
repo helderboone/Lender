@@ -1,4 +1,5 @@
-﻿using Lender.API.Models.Base;
+﻿using Lender.API.Helper;
+using Lender.API.Models.Base;
 using System.Collections.Generic;
 
 namespace Lender.API.Models
@@ -11,9 +12,9 @@ namespace Lender.API.Models
 
         public string Phone { get; set; }
 
-        public string Url { get; set; }
+        public string PhotoUrl { get; set; }
 
-        public string PublicId { get; set; }
+        public string PhotoPublicId { get; set; }
 
         public AppUser User { get; set; }
 
@@ -23,11 +24,20 @@ namespace Lender.API.Models
 
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
-        public void Update(string name, string email, string phone)
+        public void Update(string name, string email, string phone, Address address, PhotoUploadResult photo)
         {
             Name = name;
             Email = email;
             Phone = phone;
+            PhotoUrl = photo.Url;
+            PhotoPublicId = photo.PublicId;
+            Address?.Update(address.Number, address.Street, address.Neighborhood, address.City);
+        }
+
+        public void AddPhoto(PhotoUploadResult photo)
+        {
+            PhotoUrl = photo.Url;
+            PhotoPublicId = photo.PublicId;
         }
     }
 }

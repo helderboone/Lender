@@ -15,5 +15,13 @@ namespace Lender.API.Models
         public long FriendId { get; set; }
 
         public Friend Friend { get; set; }
+
+        public void Update(string number, string street, string neighborhood, string city)
+        {
+            Number = number;
+            Street = street;
+            Neighborhood = neighborhood;
+            City = city;
+        }
     }
 }

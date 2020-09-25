@@ -10,6 +10,7 @@ namespace Lender.API.Configuration
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
 
             return services;
         }

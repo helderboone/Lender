@@ -8,8 +8,8 @@
 
         public string Gender { get; set; }
 
-        public string Url { get; set; }
+        public string PhotoUrl { get; set; }
 
-        public string PublicId { get; set; }
+        public string PhotoPublicId { get; set; }
     }
 }

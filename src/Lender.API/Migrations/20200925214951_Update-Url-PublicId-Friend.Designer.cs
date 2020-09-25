@@ -3,15 +3,17 @@ using System;
 using Lender.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Lender.API.Migrations
 {
     [DbContext(typeof(LenderContext))]
-    partial class LenderContextModelSnapshot : ModelSnapshot
+    [Migration("20200925214951_Update-Url-PublicId-Friend")]
+    partial class UpdateUrlPublicIdFriend
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,10 +180,10 @@ namespace Lender.API.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("PhotoPublicId")
+                    b.Property<string>("PublicId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("PhotoUrl")
+                    b.Property<string>("Url")
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserId")

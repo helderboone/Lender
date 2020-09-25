@@ -23,13 +23,13 @@ namespace Lender.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateFriend(CreateFriendCommand command)
+        public async Task<IActionResult> CreateFriend([FromForm] CreateFriendCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateFriend(UpdateFriendCommand command)
+        public async Task<IActionResult> UpdateFriend([FromForm] UpdateFriendCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
