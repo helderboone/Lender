@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
-};
+    production: true,
+    apiUrl: 'http://lender-api:5000/api/'
+  };
