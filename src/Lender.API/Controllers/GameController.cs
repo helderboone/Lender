@@ -1,5 +1,6 @@
 ﻿using Lender.API.Application.Commands;
 using Lender.API.Application.Queries;
+using Lender.API.Application.Queries.Games;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -40,6 +41,12 @@ namespace Lender.API.Controllers
             await Mediator.Send(new DeleteGameCommand { Id = id });
 
             return NoContent();
+        }
+
+        [HttpGet("not-borrowed")]
+        public async Task<IActionResult> ListNotBorrowed()
+        {
+            return Ok(await Mediator.Send(new NotBorrowedGamesQuery()));
         }
     }
 }

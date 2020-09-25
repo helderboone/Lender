@@ -4,6 +4,7 @@ using Lender.API.Data;
 using Lender.API.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace Lender.API.Application.Queries.Handlers
 {
     public class GameQueryHandler :
         IRequestHandler<GameDetailQuery, GameDto>,
-        IRequestHandler<GameListQuery, GameDto[]>
+        IRequestHandler<GameListQuery, GameDto[]>,
+        IRequestHandler<NotBorrowedGamesQuery, GameDto[]>
     {
         private readonly LenderContext _context;
         private readonly IMapper _mapper;
@@ -34,6 +36,13 @@ namespace Lender.API.Application.Queries.Handlers
             var games = await _context.Games.ToArrayAsync();
 
             return _mapper.Map<Game[], GameDto[]>(games);
+        }
+
+        public async Task<GameDto[]> Handle(NotBorrowedGamesQuery request, CancellationToken cancellationToken)
+        {
+            var notBorrowedGames = await _context.Games.Where(x => x.Loans.Any(l => l.EndDate != null)).ToArrayAsync();
+
+            return _mapper.Map<Game[], GameDto[]>(notBorrowedGames);
         }
     }
 }

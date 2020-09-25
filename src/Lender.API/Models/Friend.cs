@@ -1,4 +1,5 @@
 ﻿using Lender.API.Models.Base;
+using System.Collections.Generic;
 
 namespace Lender.API.Models
 {
@@ -19,6 +20,8 @@ namespace Lender.API.Models
         public string UserId { get; set; }
 
         public Address Address { get; set; }
+
+        public ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
         public void Update(string name, string email, string phone)
         {

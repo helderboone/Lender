@@ -14,6 +14,7 @@ namespace Lender.API.Data
 
         public DbSet<Friend> Friends { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

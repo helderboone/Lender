@@ -27,6 +27,16 @@ namespace Lender.API.AutoMapper
             CreateMap<UpdateFriendCommand, Game>().ReverseMap();
 
             CreateMap<Game, GameDto>();
+
+            CreateMap<Loan, LoanDto>();
+
+            CreateMap<Game, LoanDto>()
+                .ForMember(x => x.GameName, y => y.MapFrom(z => z.Name))
+                .ForMember(x => x.GameId, y => y.MapFrom(z => z.Id));
+
+            CreateMap<Friend, LoanDto>()
+                .ForMember(l => l.FriendName, y => y.MapFrom(f => f.Name))
+                .ForMember(l => l.FriendId, y => y.MapFrom(f => f.Id));
         }
     }
 }

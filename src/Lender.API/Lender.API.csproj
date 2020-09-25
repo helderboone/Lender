@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20200923221054_AddFriend.Designer.cs" />
     <Compile Remove="Migrations\20200923221722_AddFriend.cs" />
     <Compile Remove="Migrations\20200923221722_AddFriend.Designer.cs" />
+    <Compile Remove="Migrations\20200924221439_Add-Loan-Friend-Game.cs" />
+    <Compile Remove="Migrations\20200924221439_Add-Loan-Friend-Game.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
