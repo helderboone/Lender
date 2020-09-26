@@ -1,4 +1,5 @@
 ﻿using Lender.API.Configuration.Settings;
+using Lender.API.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -16,7 +17,10 @@ namespace Lender.API.Configuration
         {
             services.AddDbContext<Data.LenderContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(LenderPrestadorExceptionFilter));
+            });
 
             services.AddCors();
 
