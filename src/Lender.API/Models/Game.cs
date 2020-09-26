@@ -53,6 +53,7 @@ namespace Lender.API.Models
 
         public void AddLoan(Loan loan)
         {
+            if (loan == null) return;
             _loans.Add(loan);
             Validar();
         }

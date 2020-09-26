@@ -18,6 +18,9 @@ namespace Lender.API.Models.Validators
                 .MaximumLength(50)
                 .WithMessage("Gender can has 50 caracters");
 
+            RuleFor(a => a.User)
+                .NotNull()
+                .WithMessage("User is required");
         }
     }
 }

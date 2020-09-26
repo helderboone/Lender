@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lender.API", "Lender.API\Lender.API.csproj", "{3F756952-F713-4967-B4F8-4404355630D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lender.API", "Lender.API\Lender.API.csproj", "{3F756952-F713-4967-B4F8-4404355630D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{216BC8EA-3665-4EFB-ACAF-0FF1DC89CF65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{260A6D1A-2C0D-4FA9-B647-EA71D58DBCDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lender.API.UnitTest", "..\tests\Lender.API.UnitTest\Lender.API.UnitTest.csproj", "{90A561E3-8AE3-45C2-A6F2-603473D42874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,17 @@ Global
 		{3F756952-F713-4967-B4F8-4404355630D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F756952-F713-4967-B4F8-4404355630D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F756952-F713-4967-B4F8-4404355630D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A561E3-8AE3-45C2-A6F2-603473D42874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A561E3-8AE3-45C2-A6F2-603473D42874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A561E3-8AE3-45C2-A6F2-603473D42874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A561E3-8AE3-45C2-A6F2-603473D42874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F756952-F713-4967-B4F8-4404355630D9} = {216BC8EA-3665-4EFB-ACAF-0FF1DC89CF65}
+		{90A561E3-8AE3-45C2-A6F2-603473D42874} = {260A6D1A-2C0D-4FA9-B647-EA71D58DBCDB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86754196-E5D2-4201-8426-0BEB47931D80}
