@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lender.API.Application.DTO;
+using Lender.API.Application.Notifify;
 using Lender.API.Data;
 using Lender.API.Helper;
 using Lender.API.Models;
@@ -19,13 +20,15 @@ namespace Lender.API.Application.Commands
         private readonly LenderContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IPhotoAccessor _photoAccesor;
+        private readonly NotificationContext _notification;
         private readonly IMapper _mapper;
 
-        public FriendCommandHandler(LenderContext context, UserManager<AppUser> userManager, IPhotoAccessor photoAccesor, IMapper mapper)
+        public FriendCommandHandler(LenderContext context, UserManager<AppUser> userManager, IPhotoAccessor photoAccesor, NotificationContext notification, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
             _photoAccesor = photoAccesor;
+            _notification = notification;
             _mapper = mapper;
         }
 
@@ -52,6 +55,12 @@ namespace Lender.API.Application.Commands
         public async Task<FriendDto> Handle(UpdateFriendCommand request, CancellationToken cancellationToken)
         {
             var friend = await _context.Friends.Include(x => x.Address).FirstOrDefaultAsync(f => f.Id == request.Id);
+
+            if (friend == null)
+            {
+                _notification.AddNotification("Friend", "Friend not found");
+                return null;
+            }
 
             _photoAccesor.DeletePhoto(friend.PhotoPublicId);
 

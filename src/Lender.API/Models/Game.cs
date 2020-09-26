@@ -1,4 +1,5 @@
-﻿using Lender.API.Helper;
+﻿using FluentValidation;
+using Lender.API.Helper;
 using Lender.API.Models.Base;
 using System.Collections.Generic;
 
@@ -31,6 +32,23 @@ namespace Lender.API.Models
         {
             PhotoUrl = photo.Url;
             PhotoPublicId = photo.PublicId;
+        }
+
+        public bool Validar()
+        {
+            return Validate(this, new GameValidator());
+        }
+    }
+
+    public class GameValidator : AbstractValidator<Game>
+    {
+        public GameValidator()
+        {
+            RuleFor(a => a.Name)
+                .NotEmpty()
+                .WithMessage("Name is required")
+                .MaximumLength(255)
+                .WithMessage("Name can has 255 caracters");
         }
     }
 }

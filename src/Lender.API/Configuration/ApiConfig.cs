@@ -20,6 +20,7 @@ namespace Lender.API.Configuration
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(LenderPrestadorExceptionFilter));
+                options.Filters.Add(typeof(NotificationFilter));
             });
 
             services.AddCors();
