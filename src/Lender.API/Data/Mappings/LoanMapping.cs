@@ -10,6 +10,9 @@ namespace Lender.API.Data.Mappings
         {
             builder.HasKey(l => new { l.FriendId, l.GameId });
 
+            //Ignored because the primary key is the combination of two FKs (Friend and Game)
+            builder.Ignore(x => x.Id);
+
             builder.Property(c => c.StartDate)
                 .IsRequired()
                 .HasColumnType("date");

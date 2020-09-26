@@ -11,6 +11,8 @@ namespace Lender.API.Models.Base
 
         public DateTime CreationTime { get; set; }
 
+        public abstract bool Validar();
+
         [NotMapped]
         public bool Valid { get; private set; }
         [NotMapped]

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Lender.API.Application.DTO;
+using Lender.API.Application.Notifify;
 using Lender.API.Data;
 using Lender.API.Models;
+using Lender.API.Models.Base;
+using Lender.API.Models.Validators;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,11 +18,15 @@ namespace Lender.API.Application.Commands.Handlers
         IRequestHandler<EndLoanCommand, LoanDto>
     {
         private readonly LenderContext _context;
+        private readonly NotificationContext _notification;
+        private readonly IEntityValidator _entityValidator;
         private readonly IMapper _mapper;
 
-        public LoanCommandHandler(LenderContext context, IMapper mapper)
+        public LoanCommandHandler(LenderContext context, NotificationContext notification, IEntityValidator entityValidator, IMapper mapper)
         {
             _context = context;
+            _notification = notification;
+            _entityValidator = entityValidator;
             _mapper = mapper;
         }
 
@@ -27,19 +34,36 @@ namespace Lender.API.Application.Commands.Handlers
         {
             var friend = await _context.Friends.FindAsync(request.FriendId);
 
+            if (friend == null)
+            {
+                _notification.AddNotification("Friend", "Friend not found");
+                return null;
+            }
+
             var game = await _context.Games.FindAsync(request.GameId);
 
-            var loan = new Loan
+            if (game == null)
             {
-                StartDate = DateTime.Now,
+                _notification.AddNotification("Game", "Game not found");
+                return null;
+            }
 
-                Friend = friend,
-                Game = game
+            bool isGameBorrowed = _context.Loans.Any(x => x.GameId == request.GameId && x.EndDate == null);
 
-            };
+            if (isGameBorrowed)
+            {
+                _notification.AddNotification("Game", "This game is borrowed. You must get back before to borrow it.");
+                return null;
+            }
 
-            game.Loans.Add(loan);
-            friend.Loans.Add(loan);
+            var loan = new Loan(friend, game);
+
+            game.AddLoan(loan);
+            friend.AddLoan(loan);
+
+            _entityValidator.Validate(new Entity[] { loan });
+
+            if (_notification.HasNotifications) return null;
 
             await _context.Commit();
 
@@ -52,6 +76,12 @@ namespace Lender.API.Application.Commands.Handlers
                 .Include(l => l.Friend)
                 .Include(l => l.Game)
                 .FirstOrDefaultAsync(l => l.FriendId == request.FriendId && l.GameId == request.GameId);
+
+            if (loan == null)
+            {
+                _notification.AddNotification("Loan", "This loan does not exist");
+                return null;
+            }
 
             loan.EndLoan();
 

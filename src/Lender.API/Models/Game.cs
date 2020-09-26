@@ -1,54 +1,71 @@
-﻿using FluentValidation;
-using Lender.API.Helper;
+﻿using Lender.API.Helper;
 using Lender.API.Models.Base;
+using Lender.API.Models.Validators;
 using System.Collections.Generic;
 
 namespace Lender.API.Models
 {
     public class Game : Entity
     {
-        public string Name { get; set; }
+        public Game(string name, string gender, AppUser user)
+        {
+            Name = name;
+            Gender = gender;
+            User = user;
+            _loans = new List<Loan>();
+            Validar();
+        }
 
-        public string Gender { get; set; }
+        protected Game()
+        {
+            _loans = new List<Loan>();
+        }
 
-        public string PhotoUrl { get; set; }
+        public string Name { get; private set; }
 
-        public string PhotoPublicId { get; set; }
+        public string Gender { get; private set; }
 
-        public string UserId { get; set; }
-        public AppUser User { get; set; }
+        public string PhotoUrl { get; private set; }
 
-        public ICollection<Loan> Loans { get; set; } = new List<Loan>();
+        public string PhotoPublicId { get; private set; }
+
+        public string UserId { get; private set; }
+        public AppUser User { get; private set; }
+
+        private readonly List<Loan> _loans;
+        public IReadOnlyCollection<Loan> Loans => _loans;
 
         public void Update(string name, string gender, PhotoUploadResult photo)
         {
             Name = name;
             Gender = gender;
-            PhotoUrl = photo.Url;
-            PhotoPublicId = photo.PublicId;
+            PhotoUrl = photo?.Url;
+            PhotoPublicId = photo?.PublicId;
+            Validar();
         }
 
         public void AddPhoto(PhotoUploadResult photo)
         {
-            PhotoUrl = photo.Url;
-            PhotoPublicId = photo.PublicId;
+            PhotoUrl = photo?.Url;
+            PhotoPublicId = photo?.PublicId;
+            Validar();
         }
 
-        public bool Validar()
+        public void AddLoan(Loan loan)
+        {
+            _loans.Add(loan);
+            Validar();
+        }
+
+        public void AssociateUser(AppUser user)
+        {
+            User = user;
+            Validar();
+        }
+
+        public override bool Validar()
         {
             return Validate(this, new GameValidator());
-        }
-    }
-
-    public class GameValidator : AbstractValidator<Game>
-    {
-        public GameValidator()
-        {
-            RuleFor(a => a.Name)
-                .NotEmpty()
-                .WithMessage("Name is required")
-                .MaximumLength(255)
-                .WithMessage("Name can has 255 caracters");
         }
     }
 }

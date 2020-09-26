@@ -4,7 +4,6 @@ using Lender.API.Configuration.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
-using System.IO;
 
 namespace Lender.API.Helper
 {
@@ -22,9 +21,10 @@ namespace Lender.API.Helper
         {
             var uploadResult = new ImageUploadResult();
 
-            if (file.Length > 0)
+            if (file == null || file.Length == 0) return new PhotoUploadResult();
+
+            using (var stream = file.OpenReadStream())
             {
-                using Stream stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
@@ -39,13 +39,15 @@ namespace Lender.API.Helper
 
             return new PhotoUploadResult
             {
-                PublicId = uploadResult.PublicId,
-                Url = uploadResult.Url.ToString()
+                PublicId = uploadResult?.PublicId,
+                Url = uploadResult?.Url.ToString()
             };
         }
 
         public string DeletePhoto(string publicId)
         {
+            if (string.IsNullOrEmpty(publicId)) return null;
+
             var deleteParams = new DeletionParams(publicId);
 
             var result = _cloudinary.Destroy(deleteParams);
