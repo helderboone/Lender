@@ -52,7 +52,7 @@ namespace Lender.API.UnitTest
 
             var game = new Game(name, "Sport", _user);
             game.Valid.Should().BeFalse();
-            Assert.Contains("Name can has 255 caracters", game.ValidationResult.Errors.Select(x => x.ErrorMessage));
+            Assert.Contains("The name max length is 255 characters", game.ValidationResult.Errors.Select(x => x.ErrorMessage));
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace Lender.API.UnitTest
 
             var game = new Game("FIFA2020", gender, _user);
             game.Valid.Should().BeFalse();
-            Assert.Contains("Gender can has 50 caracters", game.ValidationResult.Errors.Select(x => x.ErrorMessage));
+            Assert.Contains("The gender max length is 50 characters", game.ValidationResult.Errors.Select(x => x.ErrorMessage));
         }
 
         [Fact]
