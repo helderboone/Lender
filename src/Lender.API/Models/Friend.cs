@@ -49,7 +49,7 @@ namespace Lender.API.Models
             Phone = phone;
             PhotoUrl = photo?.Url;
             PhotoPublicId = photo?.PublicId;
-            Address?.Update(address.Number, address.Street, address.Neighborhood, address.City);
+            Address?.Update(address?.Number, address?.Street, address?.Neighborhood, address?.City);
             Validar();
         }
 
@@ -68,6 +68,8 @@ namespace Lender.API.Models
 
         public void AddLoan(Loan loan)
         {
+            if (loan == null) return;
+
             _loans.Add(loan);
             Validar();
         }

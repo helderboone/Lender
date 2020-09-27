@@ -10,19 +10,20 @@ namespace Lender.API.Models.Validators
                 .NotEmpty()
                 .WithMessage("Name is required")
                 .MaximumLength(255)
-                .WithMessage("Name can has 255 caracters");
+                .WithMessage("The name max length is 255 characters");
 
 
             RuleFor(a => a.Email)
                 .NotEmpty()
-                .WithMessage("Name is required")
-                .EmailAddress();
+                .WithMessage("Email is required")
+                .EmailAddress()
+                .WithMessage("Email should use the following format example@email.com");
 
             RuleFor(a => a.Phone)
                 .NotEmpty()
                 .WithMessage("Phone is required")
                 .MaximumLength(20)
-                .WithMessage("Phone can has 255 caracters");
+                .WithMessage("The phone max length is 255 characters");
 
             RuleFor(a => a.Address)
                 .NotNull()
