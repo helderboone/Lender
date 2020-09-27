@@ -12,6 +12,7 @@ namespace Lender.API.Data.Mappings
 
             //Ignored because the primary key is the combination of two FKs (Friend and Game)
             builder.Ignore(x => x.Id);
+            builder.Ignore(x => x.CreationTime);
 
             builder.Property(c => c.StartDate)
                 .IsRequired()

@@ -28,7 +28,7 @@ namespace Lender.API.Data
 
         public async Task<bool> Commit()
         {
-            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreationTime") != null))
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreationTime") != null && entry.Entity.GetType().GetProperty("StartDate") == null))
             {
                 if (entry.State == EntityState.Added)
                 {

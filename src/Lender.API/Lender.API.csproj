@@ -12,6 +12,8 @@
     <Compile Remove="Migrations\20200923221722_AddFriend.Designer.cs" />
     <Compile Remove="Migrations\20200924221439_Add-Loan-Friend-Game.cs" />
     <Compile Remove="Migrations\20200924221439_Add-Loan-Friend-Game.Designer.cs" />
+    <Compile Remove="Migrations\20200927230622_Remove-CreationTime-Loan.cs" />
+    <Compile Remove="Migrations\20200927230622_Remove-CreationTime-Loan.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

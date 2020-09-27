@@ -69,7 +69,7 @@ namespace Lender.API.Application.Commands
 
         public async Task<GameDto> Handle(UpdateGameCommand request, CancellationToken cancellationToken)
         {
-            var game = await _context.Games.FindAsync(request.Id);
+            var game = await _context.Games.Include(g => g.User).FirstOrDefaultAsync(g => g.Id == request.Id);
 
             if (game == null)
             {
@@ -98,7 +98,7 @@ namespace Lender.API.Application.Commands
 
         public async Task<Unit> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
         {
-            var game = await _context.Games.FindAsync(request.Id);
+            var game = await _context.Games.Include(x => x.Loans).FirstOrDefaultAsync(g => g.Id == request.Id);
 
             if (game == null)
             {
@@ -116,11 +116,7 @@ namespace Lender.API.Application.Commands
 
             _photoAccesor.DeletePhoto(game.PhotoPublicId);
 
-            var loansGames = await _context.Loans.Where(x => x.GameId == request.Id).ToArrayAsync();
-
             _context.Games.Remove(game);
-
-            _context.Loans.RemoveRange(loansGames);
 
             await _context.Commit();
 

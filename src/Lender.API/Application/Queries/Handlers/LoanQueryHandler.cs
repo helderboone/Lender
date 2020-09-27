@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace Lender.API.Application.Queries.Handlers
 {
     public class LoanQueryHandler : IRequestHandler<LoanListQuery, LoanDto[]>
-
     {
         private readonly LenderContext _context;
         private readonly IMapper _mapper;
