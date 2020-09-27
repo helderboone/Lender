@@ -1,0 +1,10 @@
+<div class="card card-inline-custom" style="width: 18rem;" *ngFor="let game of games">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+        <h5 class="card-title">{{game.name}}</h5>
+        <p class="card-text">
+            <label><strong>Gênero:&nbsp;</strong></label><span>{{game.gender}}</span> <br/> 
+        </p>
+        <a class="btn btn-primary" [routerLink]="['/jogos/', game.id]">Detalhe</a>
+    </div>
+</div>

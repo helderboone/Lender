@@ -1,0 +1,26 @@
+<div class="page-title mt-5">
+    <h4>LISTA DE AMIGOS</h4> <a class=" btn btn-success"></a>
+</div>
+
+<hr />
+
+
+<div class="card mb-2 card-inline-custom" style="max-width: 540px;" *ngFor="let friend of friends">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img [src]="friend.photoUrl || imageHelper.defaultFriendImageUrl" class="card-img-top ml-3 mt-2" alt="..." style="width:100%;border-radius:4px;">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{friend.name}}</h5>
+                <p class="card-text">
+                    <label><strong>E-mail:&nbsp;</strong></label><span>{{friend.email}}</span> <br />
+                    <label><strong>Phone:&nbsp;</strong></label><span>{{friend.phone}}</span> <br />
+                </p>
+            </div>
+            <a class="btn btn-primary ml-4 mb-2" [routerLink]="['/amigos/', friend.id]"><i class="fa fa-search"></i>&nbsp;&nbsp;Detalhe</a>
+            <a class="btn btn-warning ml-1 mb-2" [routerLink]="['/editar-amigo/', friend.id]"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Editar</a>
+            <button class="btn btn-danger ml-1 mb-2" (click)="remove(friend.id)"><i class="fa fa-trash"></i>&nbsp;&nbsp;Remover</button>
+        </div>
+    </div>
+</div>

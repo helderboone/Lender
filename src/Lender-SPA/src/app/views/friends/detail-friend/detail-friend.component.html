@@ -1,0 +1,54 @@
+
+
+<div class="title fluid-container mt-5">
+    <h3 class="ml-5">DETALHE</h3>
+</div>
+
+<hr class="fluid-container" style="max-width:1770px" />
+
+<!--Section: Block Content-->
+<section class="mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div id="mdb-lightbox-ui"></div>
+            <div class="mdb-lightbox">
+                <div class="row product-gallery mx-1">
+                    <div class="col-12 mb-0" style="margin-left: 30%;border-radius: 100px;">
+                        <figure class="view overlay rounded z-depth-1 main-img" style="width:50%;">
+                            <img [src]="friendModel.photoUrl || defaultImageUrl" class="img-fluid z-depth-1"
+                                style="border-radius:4px;">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>{{friendModel.name}}</h5>
+            <p class="mb-2 text-muted text-uppercase small">{{friendModel.email}}</p>
+            <p><span class="mr-1"><strong>{{friendModel.phone}}</strong></span></p>
+            <div class="table-responsive">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Cidade</strong></th>
+                            <td>{{friendModel.city}}</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Bairro</strong></th>
+                            <td>{{friendModel.neighborhood}}</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Rua</strong></th>
+                            <td>{{friendModel.street}}</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Numero</strong></th>
+                            <td>{{friendModel.number}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+        </div>
+    </div>
+</section>

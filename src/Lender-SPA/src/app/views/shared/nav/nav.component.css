@@ -1,0 +1,25 @@
+.user-name-menu
+{
+    color:black !important;
+}
+.navbar-nav {
+    float:none;
+    margin-left:5%;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
+
+a {
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 550 !important;
+}
+
+.menu{
+    border-bottom:2.3px solid black;
+    background-color:orange !important;
+}
