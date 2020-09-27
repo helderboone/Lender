@@ -13,7 +13,7 @@ namespace Lender.API.Filters
 
             response.StatusCode = (int)HttpStatusCode.InternalServerError;
             response.ContentType = "application/json";
-            context.Result = new JsonResult($"Ocorreu um erro ao processar a requisição");
+            context.Result = new JsonResult($"Ocorreu um erro ao processar a requisição {context.Exception} \n {context.Exception.InnerException}");
         }
     }
 }

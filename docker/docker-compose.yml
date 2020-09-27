@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+
+  postgresdb:
+    image: postgres:12.4
+    container_name: postgresdb
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: Lender
+    networks:
+      - lender-net
+    volumes:
+      - postgresdb-data:/var/lib/postgresql/data
+    restart: always
+
+  lender-api:
+    container_name: lender-api
+    image: lender-api
+    build:
+      context: ../src
+      dockerfile: ./Lender.API/Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://*:5000
+    ports:
+      - "7001:5000"
+    depends_on:
+      - postgresdb
+    networks:
+      - lender-net   
+
+volumes:
+  postgresdb-data:
+
+networks:
+  lender-net:
+    driver: bridge      
+
+  
