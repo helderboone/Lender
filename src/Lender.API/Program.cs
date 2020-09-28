@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading;
 
 namespace Lender.API
 {
@@ -25,6 +26,7 @@ namespace Lender.API
                 {
                     var context = services.GetRequiredService<LenderContext>();
                     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    Thread.Sleep(60000);
                     context.Database.Migrate();
                     Seed.SeedData(context, userManager).Wait();
                 }
