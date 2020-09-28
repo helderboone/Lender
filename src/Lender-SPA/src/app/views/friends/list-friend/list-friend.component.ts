@@ -11,7 +11,7 @@ import { FriendService } from 'src/app/services/friend.service';
 })
 export class ListFriendComponent implements OnInit {
 
-  friends: FriendModel[]; 
+  friends: FriendModel[];
 
   constructor(private friendService: FriendService,
     private alertifyService: AlertifyService,
@@ -28,7 +28,10 @@ export class ListFriendComponent implements OnInit {
         this.alertifyService.success('O amigo foi deletado');
         this.populateFriends();
       }, error => {
-        this.alertifyService.error('Falhou em deletar o amigo');
+        if (error.error && error.error[0].Message)
+          this.alertifyService.error(error.error[0].Message);
+        else
+          this.alertifyService.error('Falhou em deletar o amigo');
       });
     });
   }
