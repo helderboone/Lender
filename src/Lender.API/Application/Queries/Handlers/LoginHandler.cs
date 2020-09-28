@@ -1,4 +1,5 @@
 ﻿using Lender.API.Application.DTO;
+using Lender.API.Application.Notifify;
 using Lender.API.Helper;
 using Lender.API.Models;
 using MediatR;
@@ -12,12 +13,14 @@ namespace Lender.API.Application.Queries
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly NotificationContext _notification;
         private readonly IJwtGenerator _jwtGenerator;
 
-        public LoginHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtGenerator jwtGenerator)
+        public LoginHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,NotificationContext notification , IJwtGenerator jwtGenerator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _notification = notification;
             _jwtGenerator = jwtGenerator;
         }
 
@@ -26,11 +29,19 @@ namespace Lender.API.Application.Queries
 
             var user = await _userManager.FindByEmailAsync(request.Email);
 
-            //if (user == null) throw new RestException(HttpStatusCode.Unauthorized);
+            if (user == null)
+            {
+                _notification.AddNotification("User", "Username or password incorrect");
+                return null;
+            }            
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
-            //if (!result.Succeeded) throw new RestException(HttpStatusCode.Unauthorized);
+            if (!result.Succeeded)
+            {
+                _notification.AddNotification("User", "Username or password incorrect");
+                return null;
+            }
 
             return new UserDto
             {
