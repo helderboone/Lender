@@ -25,6 +25,7 @@ namespace Lender.API
                 {
                     var context = services.GetRequiredService<LenderContext>();
                     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    context.Database.EnsureCreated();
                     context.Database.Migrate();
                     Seed.SeedData(context, userManager).Wait();
                 }

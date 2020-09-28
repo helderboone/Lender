@@ -1,4 +1,5 @@
 ﻿using Lender.API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,7 +24,11 @@ namespace Lender.API.Data
 
             builder.Ignore<ValidationResult>();
 
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.Entity<IdentityRole>(entity => entity.Property(m => m.Name).HasMaxLength(256));
+            builder.Entity<IdentityRole>(entity => entity.Property(m => m.NormalizedName).HasMaxLength(256));
+            builder.Entity<IdentityRole>(entity => entity.Property(m => m.Id).HasMaxLength(256));
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());            
         }
 
         public async Task<bool> Commit()

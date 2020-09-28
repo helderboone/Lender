@@ -3,14 +3,16 @@ using System;
 using Lender.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lender.API.Migrations
 {
     [DbContext(typeof(LenderContext))]
-    partial class LenderContextModelSnapshot : ModelSnapshot
+    [Migration("20200928144215_MySQL")]
+    partial class MySQL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

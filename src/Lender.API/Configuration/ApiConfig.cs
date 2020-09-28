@@ -15,7 +15,7 @@ namespace Lender.API.Configuration
     {
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<Data.LenderContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Data.LenderContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers(options =>
             {
