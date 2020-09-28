@@ -13,5 +13,8 @@ ADD ./ /app/
 RUN ng build --prod
 
 FROM nginx:1.17-alpine as FINAL
+
+ADD ./nginx.conf /etc/nginx/
+
 COPY --from=build /app/dist/Lender-SPA /usr/share/nginx/html
 

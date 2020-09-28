@@ -33,6 +33,20 @@ services:
     networks:
       - lender-net   
 
+  lender-spa:
+    container_name: lender-spa
+    image: lender-spa
+    build:
+      context: ../src/Lender-SPA
+      dockerfile: ./Dockerfile
+    restart: always    
+    ports:
+      - "80:80"
+    depends_on:
+      - lender-api
+    networks:
+      - lender-net
+
 volumes:
   postgresdb-data:
 
