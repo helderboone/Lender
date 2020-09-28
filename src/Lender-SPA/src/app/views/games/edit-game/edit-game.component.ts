@@ -24,12 +24,12 @@ export class EditGameComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({});
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
-    private gameService: GameService,
-    private alertifyService: AlertifyService,
-    private spinner: NgxSpinnerService,
-    public imageHelper: ImageHelper) { }
+              private router: Router,
+              private route: ActivatedRoute,
+              private gameService: GameService,
+              private alertifyService: AlertifyService,
+              private spinner: NgxSpinnerService,
+              public imageHelper: ImageHelper) { }
 
   ngOnInit(): void {
     localStorage.removeItem('image');
@@ -41,7 +41,7 @@ export class EditGameComponent implements OnInit {
   setUploaderCallbacks() {
     this.uploader.onBeforeUploadItem = (item) => {
       item.withCredentials = false;
-    }
+    };
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
@@ -53,21 +53,21 @@ export class EditGameComponent implements OnInit {
   initializeForm() {
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
-      gender: ['', Validators.required] 
+      gender: ['', Validators.required]
     });
   }
 
   async populateForm() {
     this.route.params.subscribe(data => {
-      this.gameService.getGameById(data["id"]).subscribe(data => {
+      this.gameService.getGameById(data['id']).subscribe(data => {
         this.gameModel = JSON.parse(JSON.stringify(data));
         this.editForm.patchValue({
           name: this.gameModel.name,
-          gender: this.gameModel.gender, 
+          gender: this.gameModel.gender,
           photoUrl: this.gameModel.photoUrl
         });
         if (this.gameModel.photoUrl) {
-          var photoUrlArray = this.gameModel.photoUrl.split('/');
+          let photoUrlArray = this.gameModel.photoUrl.split('/');
           this.imageHelper.dataURLtoFile(this.gameModel.photoUrl, photoUrlArray.pop()).then(file => {
             this.gameModel.File = file;
           });
@@ -94,7 +94,7 @@ export class EditGameComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.editForm.valid) {
-      let gameForm = this.editForm.value;
+      const gameForm = this.editForm.value;
       gameForm.id = this.gameModel.id;
       const formData = this.populateFormData(gameForm);
       localStorage.setItem('image', gameForm.File);
@@ -103,12 +103,12 @@ export class EditGameComponent implements OnInit {
         .subscribe(data => {
           setTimeout(() => {
             this.spinner.hide();
-            this.router.navigate(['amigos']);
-            this.alertifyService.success("Your profile has been successfully updated!");
+            this.router.navigate(['jogos']);
+            this.alertifyService.success('Your game has been successfully updated!');
           }, 1000);
         },
           error => {
-            console.log(error)
+            console.log(error);
           });
     }
   }
@@ -116,8 +116,9 @@ export class EditGameComponent implements OnInit {
   populateFormData(gameForm: any) {
     const formData = new FormData();
     gameForm.File = this.gameModel.File;
-    for (var key in gameForm)
+    for (let key in gameForm) {
       formData.append(key, gameForm[key]);
+    }
 
     return formData;
   }
