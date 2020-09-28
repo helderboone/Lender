@@ -40,7 +40,7 @@ namespace Lender.API.Application.Queries.Handlers
 
         public async Task<GameDto[]> Handle(NotBorrowedGamesQuery request, CancellationToken cancellationToken)
         {
-            var notBorrowedGames = await _context.Games.Where(x => x.Loans.Any(l => l.EndDate != null)).ToArrayAsync();
+            var notBorrowedGames = await _context.Games.Where(x => x.Loans.Any(l => l.EndDate != null) && !x.Loans.Any()).ToArrayAsync();
 
             return _mapper.Map<Game[], GameDto[]>(notBorrowedGames);
         }

@@ -106,7 +106,7 @@ namespace Lender.API.Application.Commands
                 return Unit.Value;
             }
 
-            bool isGameBorrowed = _context.Loans.Any(x => x.GameId == request.Id && x.EndDate == null);
+            bool isGameBorrowed = game.Loans.Any(x => x.GameId == request.Id && x.EndDate == null);
 
             if (isGameBorrowed)
             {

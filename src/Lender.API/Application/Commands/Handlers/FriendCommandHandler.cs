@@ -9,6 +9,7 @@ using Lender.API.Models.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -101,11 +102,19 @@ namespace Lender.API.Application.Commands
 
         public async Task<Unit> Handle(DeleteFriendCommand request, CancellationToken cancellationToken)
         {
-            var friend = await _context.Friends.FindAsync(request.Id);
+            var friend = await _context.Friends.Include(f => f.Loans).FirstOrDefaultAsync(f => f.Id == request.Id);
 
             if (friend == null)
             {
                 _notification.AddNotification("Friend", "Friend not found");
+                return Unit.Value;
+            }
+
+            bool isGameBorrowed = friend.Loans.Any(x => x.GameId == request.Id && x.EndDate == null);
+
+            if (isGameBorrowed)
+            {
+                _notification.AddNotification("Game", "This game is borrowed. You must get back before delete it.");
                 return Unit.Value;
             }
 
