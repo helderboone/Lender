@@ -1,1 +1,41 @@
-<p>add-loan works!</p>
+<div class="title fluid-container mt-5">
+    <h3 class="ml-5">ADICIONAR EMPRESTIMO</h3>
+</div>
+
+<hr class="fluid-container" style="max-width:1770px" />
+
+<!--Section: Block Content-->
+<section class="mt-5">
+    <form class="text-center border border-light p-5" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group block-group">
+                    <label class="control-label">Jogo </label>
+                    <select class="form-control" formControlName="gameId" [ngClass]="{ 'is-invalid': submitted && addForm.get('gameId').errors }">
+                        <option selected value="">Selecionar Jogo</option>
+                        <option *ngFor="let game of games" value="{{game.id}}">{{game.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="submitted && addForm.get('gameId').errors">
+                    <div *ngIf="addForm.get('gameId').errors.required" style="color:red;">O campo Jogo é obrigatório</div>
+                </div>
+                <div class="form-group block-group">
+                    <label class="control-label">Amigo</label>
+                    <select class="form-control" formControlName="friendId" [ngClass]="{ 'is-invalid': submitted && addForm.get('friendId').errors }">
+                        <option selected value="">Selecionar Amigo</option>
+                        <option *ngFor="let friend of friends" value="{{friend.id}}">{{friend.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="submitted && addForm.get('friendId').errors">
+                    <div *ngIf="addForm.get('friendId').errors.required" style="color:red;">O campo Amigo é obrigatório</div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;&nbsp;
+                    Emprestar Jogo</button>
+                <hr>
+            </div>
+        </div>
+    </form>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Carregando...</p>
+</ngx-spinner>

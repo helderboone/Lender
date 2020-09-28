@@ -3,7 +3,8 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class ImageHelper {
-    readonly defaultFriendImageUrl: string = '../../../../assets/default-profile-icon.jpg';
+    readonly defaultFriendImageUrl: string = 'assets/default-profile-icon.jpg';
+    readonly defaultGameImageUrl: string = 'assets/img-icon.svg';
 
     constructor(private httpClient: HttpClient) { }    
 

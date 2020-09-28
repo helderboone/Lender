@@ -1,5 +1,5 @@
 <div class="title fluid-container mt-5">
-    <h3 class="ml-5">EDITAR</h3>
+    <h3 class="ml-5">EDITAR AMIGO</h3>
 </div>
 
 <hr class="fluid-container" style="max-width:1770px" />
@@ -29,52 +29,52 @@
             <div class="col-md-3">
                 <div class="form-group block-group">
                     <label class="control-label">Nome </label>
-                    <input type="text" class="form-control" id="name" formControlName="name" required>
-                    <!-- <div *ngIf="submitted && editForm.get('name').errors">
-                        <div *ngIf="editForm.get('name').errors.required">O campo Nome é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="name" formControlName="name" required [ngClass]="{ 'is-invalid': submitted && editForm.get('name').errors }">
+                    <div *ngIf="submitted && editForm.get('name').errors">
+                        <div *ngIf="editForm.get('name').errors.required" style="color:red;">O campo Nome é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group block-group">
                     <label class="control-label">Celular</label>
-                    <input type="text" class="form-control" id="phone" formControlName="phone" required>
-                    <!-- <div *ngIf="submitted && editForm.get('phone').errors">
-                        <div *ngIf="editForm.get('phone').errors.required">O campo Celular é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="phone" formControlName="phone" required [ngClass]="{ 'is-invalid': submitted && editForm.get('phone').errors }">
+                    <div *ngIf="submitted && editForm.get('phone').errors">
+                        <div *ngIf="editForm.get('phone').errors.required" style="color:red;">O campo Celular é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group  block-group">
                     <label class="control-label">E-mail </label>
-                    <input type="text" class="form-control" id="email" formControlName="email" required>
-                    <!-- <div *ngIf="submitted && editForm.get('email').errors">
-                        <div *ngIf="editForm.get('email').errors.required">O campo E-mail é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="email" formControlName="email" required [ngClass]="{ 'is-invalid': submitted && editForm.get('email').errors }">
+                    <div *ngIf="submitted && editForm.get('email').errors">
+                        <div *ngIf="editForm.get('email').errors.required" style="color:red;">O campo E-mail é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group  block-group">
                     <label class="control-label">Cidade </label>
-                    <input type="text" class="form-control" id="city" formControlName="city" required>
-                    <!-- <div *ngIf="submitted && editForm.get('city').errors">
-                        <div *ngIf="editForm.get('city').errors.required">O campo Cidade é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="city" formControlName="city" required [ngClass]="{ 'is-invalid': submitted && editForm.get('city').errors }">
+                    <div *ngIf="submitted && editForm.get('city').errors">
+                        <div *ngIf="editForm.get('city').errors.required" style="color:red;">O campo Cidade é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group  block-group">
                     <label class="control-label">Bairro </label>
-                    <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood" required>
-                    <!-- <div *ngIf="submitted && editForm.get('neighborhood').errors">
-                        <div *ngIf="editForm.get('neighborhood').errors.required">O campo Bairro é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood" required [ngClass]="{ 'is-invalid': submitted && editForm.get('neighborhood').errors }">
+                    <div *ngIf="submitted && editForm.get('neighborhood').errors">
+                        <div *ngIf="editForm.get('neighborhood').errors.required" style="color:red;">O campo Bairro é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group  block-group">
                     <label class="control-label">Rua</label>
-                    <input type="text" class="form-control" id="street" formControlName="street" required>
-                    <!-- <div *ngIf="submitted && editForm.get('street').errors">
-                        <div *ngIf="editForm.get('street').errors.required">O campo Rua é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="street" formControlName="street" required [ngClass]="{ 'is-invalid': submitted && editForm.get('street').errors }">
+                    <div *ngIf="submitted && editForm.get('street').errors">
+                        <div *ngIf="editForm.get('street').errors.required" style="color:red;">O campo Rua é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group block-group">
                     <label class="control-label">Numero</label>
-                    <input type="text" class="form-control" id="number" formControlName="number" required>
-                    <!-- <div *ngIf="submitted && editForm.get('number').errors">
-                        <div *ngIf="editForm.get('number').errors.required">O campo Rua é obrigatório</div>
-                    </div> -->
+                    <input type="text" class="form-control" id="number" formControlName="number" required [ngClass]="{ 'is-invalid': submitted && editForm.get('number').errors }">
+                    <div *ngIf="submitted && editForm.get('number').errors">
+                        <div *ngIf="editForm.get('number').errors.required" style="color:red;">O campo Numero é obrigatório</div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;&nbsp;
                     Salvar</button>

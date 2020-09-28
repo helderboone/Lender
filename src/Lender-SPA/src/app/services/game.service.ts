@@ -12,12 +12,16 @@ export class GameService extends BaseService {
     super();
   }
 
-  addGame(gameModel: GameModel) {
-    return this.http.post(this.baseUrl + 'game', gameModel);
+  addGame(formData: FormData) {
+    return this.http.post(this.baseUrl + 'game', formData);
   }
 
   getGames() {
     return this.http.get<GameModel[]>(this.baseUrl + 'game');
+  }
+
+  getNotBorrowedGames() {
+    return this.http.get<GameModel[]>(this.baseUrl + 'game/not-borrowed');
   }
 
   getGameById(id: number) {
@@ -28,7 +32,7 @@ export class GameService extends BaseService {
     return this.http.delete(this.baseUrl + `Game/${id}`);
   }
 
-  updateGame(gameModel: GameModel) {
-    return this.http.put(this.baseUrl + `Game`, gameModel);
+  updateGame(formData: FormData) {
+    return this.http.put(this.baseUrl + `Game`, formData);
   }
 }

@@ -6,7 +6,9 @@ import * as alertify from 'alertifyjs';
 })
 export class AlertifyService {
 
-  constructor() { }
+  constructor() { 
+    alertify.set('notifier','position', 'top-right');
+  }
 
   confirm(message: string, okCallBack: () => any) {
     alertify.confirm(message, (e: any) => {

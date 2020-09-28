@@ -13,8 +13,8 @@ export class FriendService extends BaseService {
     super();
   }
 
-  addFriend(friendModel: FriendModel) {
-    return this.http.post(this.baseUrl + 'friend', friendModel);
+  addFriend(formData: FormData) {
+    return this.http.post(this.baseUrl + 'friend', formData);
   }
 
   getFriends() {

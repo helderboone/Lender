@@ -1,5 +1,11 @@
 .card-inline-custom
 {
     display:inline-block;
-    margin:1em;
+    margin:.5em;
 }
+
+h4 {
+    font-size:1.4em !important;
+    font-weight:550;
+}
+

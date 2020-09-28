@@ -1,1 +1,93 @@
-<p>add-friend works!</p>
+<div class="title fluid-container mt-5">
+    <h3 class="ml-5">ADICIONAR AMIGO</h3>
+</div>
+
+<hr class="fluid-container" style="max-width:1770px" />
+
+<!--Section: Block Content-->
+<section class="mt-5">
+    <form class="text-center border border-light p-5" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div id="mdb-lightbox-ui"></div>
+                <div class="mdb-lightbox">
+                    <div class="row product-gallery mx-1">
+                        <div class="col-12 mb-0" style="margin-left: 30%;border-radius: 100px;">
+                            <figure class="view overlay rounded z-depth-1 main-img" style="width:50%;">
+                                <input #fileUploadInput type="file" id="filePicker" style="display:none; !important"
+                                    (change)="handleFileSelect($event)" multiple>
+                                <br />
+                                <img [src]="friendModel?.photoUrl || imageHelper.defaultFriendImageUrl"
+                                    class="img-fluid z-depth-1" style="border-radius:4px;" style="width:400px;">
+                                <button #fakeFileUploadInput (click)="selectFile()" type="button" class="btn btn-warning mt-3"><i class="fa fa-upload mr-2"></i>Selecione o arquivo</button>
+
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group block-group">
+                    <label class="control-label">Nome </label>
+                    <input type="text" class="form-control" id="name" formControlName="name" required [ngClass]="{ 'is-invalid': submitted && addForm.get('name').errors }">
+                    <div *ngIf="submitted && addForm.get('name').errors">
+                        <div *ngIf="addForm.get('name').errors.required" style="color:red;">O campo Nome é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group block-group">
+                    <label class="control-label">Celular</label>
+                    <input type="text" class="form-control" id="phone" formControlName="phone" required [ngClass]="{ 'is-invalid': submitted && addForm.get('phone').errors }">
+                    <div *ngIf="submitted && addForm.get('phone').errors">
+                        <div *ngIf="addForm.get('phone').errors.required" style="color:red;">O campo Celular é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group  block-group">
+                    <label class="control-label">E-mail </label>
+                    <input type="text" class="form-control" id="email" formControlName="email" required [ngClass]="{ 'is-invalid': submitted && addForm.get('email').errors }">
+                    <div *ngIf="submitted && addForm.get('email').errors">
+                        <div *ngIf="addForm.get('email').errors.required" style="color:red;">O campo E-mail é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group  block-group">
+                    <label class="control-label">Cidade </label>
+                    <input type="text" class="form-control" id="city" formControlName="city" required [ngClass]="{ 'is-invalid': submitted && addForm.get('city').errors }">
+                    <div *ngIf="submitted && addForm.get('city').errors">
+                        <div *ngIf="addForm.get('city').errors.required" style="color:red;">O campo Cidade é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group  block-group">
+                    <label class="control-label">Bairro </label>
+                    <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood" required [ngClass]="{ 'is-invalid': submitted && addForm.get('neighborhood').errors }">
+                    <div *ngIf="submitted && addForm.get('neighborhood').errors">
+                        <div *ngIf="addForm.get('neighborhood').errors.required" style="color:red;">O campo Bairro é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group  block-group">
+                    <label class="control-label">Rua</label>
+                    <input type="text" class="form-control" id="street" formControlName="street" required [ngClass]="{ 'is-invalid': submitted && addForm.get('street').errors }">
+                    <div *ngIf="submitted && addForm.get('street').errors">
+                        <div *ngIf="addForm.get('street').errors.required" style="color:red;">O campo Rua é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group block-group">
+                    <label class="control-label">Numero</label>
+                    <input type="text" class="form-control" id="number" formControlName="number" required [ngClass]="{ 'is-invalid': submitted && addForm.get('number').errors }">
+                    <div *ngIf="submitted && addForm.get('number').errors">
+                        <div *ngIf="addForm.get('number').errors.required" style="color:red;">O campo Numero é obrigatório</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;&nbsp;
+                    Salvar</button>
+                <hr>
+            </div>
+        </div>
+    </form>
+</section>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Carregando...</p>
+</ngx-spinner>

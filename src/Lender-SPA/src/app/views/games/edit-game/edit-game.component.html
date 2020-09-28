@@ -1,1 +1,58 @@
-<p>update-game works!</p>
+<div class="title fluid-container mt-5">
+    <h3 class="ml-5">EDITAR AMIGO</h3>
+</div>
+
+<hr class="fluid-container" style="max-width:1770px" />
+
+<!--Section: Block Content-->
+<section class="mt-5">
+    <form class="text-center border border-light p-5" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div id="mdb-lightbox-ui"></div>
+                <div class="mdb-lightbox">
+                    <div class="row product-gallery mx-1">
+                        <div class="col-12 mb-0" style="margin-left: 30%;border-radius: 100px;">
+                            <figure class="view overlay rounded z-depth-1 main-img" style="width:50%;">
+                                <input #fileUploadInput type="file" id="filePicker" style="display:none; !important"
+                                    (change)="handleFileSelect($event)" multiple>
+                                <br />
+                                <img [src]="gameModel?.photoUrl || imageHelper.defaultFriendImageUrl"
+                                    class="img-fluid z-depth-1" style="border-radius:4px;" style="width:400px;">
+                                <button #fakeFileUploadInput (click)="selectFile()" type="button" class="btn btn-warning mt-3"><i class="fa fa-upload mr-2"></i>Selecione o arquivo</button>
+
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group block-group">
+                    <label class="control-label">Nome </label>
+                    <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && editForm.get('name').errors }">
+                    <div *ngIf="submitted && editForm.get('name').errors">
+                        <div *ngIf="editForm.get('name').errors.required" style="color:red;">O campo Nome é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group block-group">
+                    <label class="control-label">Genero</label>
+                    <input type="text" class="form-control" id="gender" formControlName="gender"  [ngClass]="{ 'is-invalid': submitted && editForm.get('gender').errors }">
+                    <div *ngIf="submitted && editForm.get('gender').errors">
+                        <div *ngIf="editForm.get('gender').errors.required" style="color:red;">O campo Genero é obrigatório</div>
+                    </div>
+                </div> 
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;&nbsp;
+                    Salvar</button>
+                <hr>
+            </div>
+        </div>
+    </form>
+</section>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Carregando...</p>
+</ngx-spinner>

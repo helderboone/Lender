@@ -1,1 +1,31 @@
-<p>list-loan works!</p>
+
+<div class="page-title mt-5">
+    <h4 style="float:left;">LISTA DE EMPRESTIMOS</h4> 
+    <a class="btn btn-success ml-3" [routerLink]="'/adicionar-emprestimo/'" style="color:white !important;float:left;"><i class="fa fa-plus mr-2"></i>Adicionar</a>
+</div>
+
+<br /> 
+<hr />
+ 
+<table class="table">
+        <thead>
+            <tr> 
+                <th scope="col">Amigo</th>
+                <th scope="col">Jogo</th>                
+                <th scope="col">Data de Emprestimo</th>
+                <th scope="col">Acoes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let loan of loans"> 
+                <td>{{loan.friendName}}</td>
+                <td>{{loan.gameName}}</td>
+                <td>{{loan.startDate | date:'dd/MM/yyyy'}}</td>
+                <td><button class="btn btn-danger" (click)="endLoan(loan.friendId, loan.gameId)"><i class="fa fa-check"></i>Finalizar Emprestimo</button></td>
+            </tr>        
+        </tbody>
+</table>
+ 
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Carregando...</p>
+</ngx-spinner>

@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  submitted = false;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
@@ -25,9 +27,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit() {    
+    this.submitted = true;
     if (this.loginForm.valid) {
-
       this.authService.login(this.loginForm.value)
         .subscribe(data => {        
           this.onSaveComplete(data);
