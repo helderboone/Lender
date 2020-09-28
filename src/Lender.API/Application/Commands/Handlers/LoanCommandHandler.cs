@@ -73,6 +73,7 @@ namespace Lender.API.Application.Commands.Handlers
         public async Task<LoanDto> Handle(EndLoanCommand request, CancellationToken cancellationToken)
         {
             var loan = await _context.Loans
+                .OrderByDescending(x => x.Id)
                 .Include(l => l.Friend)
                 .Include(l => l.Game)
                 .FirstOrDefaultAsync(l => l.FriendId == request.FriendId && l.GameId == request.GameId);
