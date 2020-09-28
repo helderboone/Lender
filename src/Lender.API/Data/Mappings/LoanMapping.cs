@@ -8,10 +8,8 @@ namespace Lender.API.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Loan> builder)
         {
-            builder.HasKey(l => new { l.FriendId, l.GameId });
+            builder.HasKey(l => l.Id);
 
-            //Ignored because the primary key is the combination of two FKs (Friend and Game)
-            builder.Ignore(x => x.Id);
             builder.Ignore(x => x.CreationTime);
 
             builder.Property(c => c.StartDate)
