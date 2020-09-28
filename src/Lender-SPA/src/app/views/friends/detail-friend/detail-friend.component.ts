@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ImageHelper } from 'src/app/helpers/image.helper';
 import { FriendModel } from 'src/app/models/friend.model';
 import { FriendService } from 'src/app/services/friend.service';
 
@@ -9,15 +10,13 @@ import { FriendService } from 'src/app/services/friend.service';
   styleUrls: ['./detail-friend.component.css']
 })
 export class DetailFriendComponent implements OnInit {
-  
+
   public friendModel: FriendModel;
 
-  public defaultImageUrl:string = '../../../../assets/default-profile-icon.jpg';
-
-  constructor(private route: ActivatedRoute, private friendService: FriendService) {
+  constructor(private route: ActivatedRoute, private friendService: FriendService, public imageHelper: ImageHelper) {
     this.route.params.subscribe(data => {
       friendService.getFriendById(data["id"]).subscribe(data => {
-        this.friendModel = JSON.parse(JSON.stringify(data)); 
+        this.friendModel = JSON.parse(JSON.stringify(data));
       });
     });
   }

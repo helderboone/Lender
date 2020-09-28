@@ -17,7 +17,7 @@
                                 <input #fileUploadInput type="file" id="filePicker" style="display:none; !important"
                                     (change)="handleFileSelect($event)" multiple>
                                 <br />
-                                <img [src]="gameModel?.photoUrl || imageHelper.defaultFriendImageUrl"
+                                <img [src]="gameModel?.photoUrl || imageHelper.defaultGameImageUrl"
                                     class="img-fluid z-depth-1" style="border-radius:4px;" style="width:400px;">
                                 <button #fakeFileUploadInput (click)="selectFile()" type="button" class="btn btn-warning mt-3"><i class="fa fa-upload mr-2"></i>Selecione o arquivo</button>
 
@@ -40,7 +40,7 @@
                     <div *ngIf="submitted && addForm.get('gender').errors">
                         <div *ngIf="addForm.get('gender').errors.required" style="color:red;">O campo Genero é obrigatório</div>
                     </div>
-                </div>             
+                </div>
                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;&nbsp;
                     Salvar</button>
                 <hr>

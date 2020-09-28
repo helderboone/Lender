@@ -6,13 +6,10 @@
             <div class="mdb-lightbox">
                 <div class="row product-gallery mx-1">
                     <div class="col-12 mb-0" style="margin-left: 30%;border-radius: 100px;">
-                        <figure class="view overlay rounded z-depth-1 main-img" style="width:50%;">
-                            <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
-                                data-size="410x323">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
-                                    class="img-fluid z-depth-1" style="border-radius:4px;">
-                            </a>
-                        </figure>
+                      <figure class="view overlay rounded z-depth-1 main-img" style="width:50%;">
+                        <img [src]="gameModel.photoUrl || imageHelper.defaultGameImageUrl" class="img-fluid z-depth-1"
+                            style="border-radius:4px;">
+                    </figure>
                     </div>
                 </div>
             </div>

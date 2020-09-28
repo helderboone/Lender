@@ -1,23 +1,23 @@
 
 <div class="page-title mt-5">
-    <h4 style="float:left;">LISTA DE JOGOS</h4> 
+    <h4 style="float:left;">LISTA DE JOGOS</h4>
     <a class="btn btn-success ml-3" [routerLink]="'/adicionar-jogo/'" style="color:white !important;float:left;"><i class="fa fa-plus mr-2"></i>Adicionar</a>
 </div>
 
-<br /> 
+<br />
 <hr />
 
 
 <div class="card mb-2 card-inline-custom" style="max-width: 540px;" *ngFor="let game of games">
     <div class="row g-0">
         <div class="col-md-4">
-            <img [src]="game.photoUrl || imageHelper.defaultFriendImageUrl" class="card-img-top ml-3 mt-2" alt="..." style="width:100%;border-radius:4px;">
+            <img [src]="game.photoUrl || imageHelper.defaultGameImageUrl" class="card-img-top ml-3 mt-2" alt="..." style="width:100%;border-radius:4px;">
         </div>
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">{{game.name}}</h5>
                 <p class="card-text">
-                    <label><strong>Genero:&nbsp;</strong></label><span>{{game.gender}}</span> <br /> 
+                    <label><strong>Genero:&nbsp;</strong></label><span>{{game.gender}}</span> <br />
                 </p>
             </div>
             <a class="btn btn-primary ml-4 mb-2" [routerLink]="['/jogos/', game.id]"><i class="fa fa-search"></i>&nbsp;&nbsp;Detalhe</a>
@@ -27,4 +27,3 @@
     </div>
 </div>
 
- 
