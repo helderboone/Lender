@@ -97,3 +97,8 @@ $ docker-compose up -d
 email: joao@email.com
 password: P@ssw0rd123
 ```
+#
+## PS:
+- In order to apply a migration properly was set a thread sleep to wait 35 seconds. So wait about 35 seconds to access the application
+
+- The application can be access by this URL: http://172.105.150.227
